@@ -1,0 +1,7 @@
+gensim
+logging
+ipykernel
+pandas
+scikit-learn
+matplotlib
+seaborn
