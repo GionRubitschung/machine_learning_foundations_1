@@ -55,6 +55,10 @@ This summary covers all the theoretical parts of the bfh lecture "Machine Learni
     - [Why is it important to document the setup of a machine learning run?](#why-is-it-important-to-document-the-setup-of-a-machine-learning-run)
     - [What are steps that can be taken to optimize the training material?](#what-are-steps-that-can-be-taken-to-optimize-the-training-material)
     - [What are steps that can be taken to optimize the evaluation?](#what-are-steps-that-can-be-taken-to-optimize-the-evaluation)
+  - [3. Training Exam](#3-training-exam)
+    - [Exercise 1](#exercise-1)
+      - [Question 1. Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?](#question-1-based-on-the-measurements-shown-in-the-confusion-matrix-what-is-your-interpretation-of-the-machine-learning-model-performance)
+      - [Solution](#solution)
 
 ## 1. Machine learning & data engineering context
 
@@ -327,8 +331,6 @@ The inter-annotator agreement defines roughly an upper limit (upper bound) for t
 
 ### 2.6 Vectorization
 
-Relevant materials: Notebooks on Countvectorisation and trivial Iris vectorisation. TODO: ask savio to send notebooks and link them here
-
 #### What is vectorization?
 
 The process involves converting data originally in various forms or formats (like text, images, or other data) into vectors. In data processing and machine learning, vectorization is often used to structure data in a form more easily understood and analyzed by algorithms. For example, words in texts can be converted into vectors for text analysis algorithms.
@@ -420,3 +422,81 @@ Executing with the above combination is often called a Run.
 - Increase test data size
 - Increase testing (Test multiple times)
 - Test with different splits across test and train
+
+## 3. Training Exam
+
+### Exercise 1
+
+You train a machine learning model to classify customer e-mails. There are two classes (COMPLAINT, QUESTION).
+
+After training the model you test its performance on a test set with 10000 samples and observe the results presented in the following confusion matrix:
+
+![training-exam-conf-mat](./img/training-exam-confusion-mat.png)
+
+The end-users of the solution are very focused on identifying COMPLAINTS.
+
+The reasoning behind this is, that those e-mails should be handled with higher priority, as it provides an efficient way to increase customer satisfaction.
+
+#### Question 1. Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?
+
+Based on the measurements shown in the confusion matrix, here's the interpretation
+of the machine learning model performance:
+
+|                      | 0 - COMPLAINT | 1 - QUESTION |
+| -------------------- | ------------- | ------------ |
+| True Positives (TP)  | 500           | 7000         |
+| True Negatives (TN)  | 7000          | 500          |
+| False Positives (FP) | 1000          | 1500         |
+| False Negatives (FN) | 1500          | 1000         |
+
+Now, let's calculate key performance metrics:
+
+Accuracy: $\frac{TP + TN}{TOTAL}=\frac{7000 + 500}{10'000}=75\%$
+
+Precision (for Class 0 - COMPLAINT): $\frac{TP}{TP+FP}=\frac{500}{500+1000}≈33.33\%$
+
+Recall (for Class 0 - COMPLAINT): $\frac{TP}{TP+FN}=\frac{500}{500+1500}=25\%$
+
+The model has a precision of only 33.333% = 500 / (500 + 1000), with a recall of 25% = 500 / (500 + 1500). Based on this observation we can say the model is very inaccurate.
+
+#### Solution
+Here is a sample answer:
+
+The confusion matrix shows us, that there is considerable confusion for both classes. 2500 samples have been falsely classified overall. The model performance is not suitable for the use case. 1000 E-mails of class COMPLAINT are classified as QUESTION, and 1500 QUESTION E-Mails have been classified as COMPLAINT. The use case is focused on treating COMPLAINT E-Mails with higher priority. It is therefore very problematic that 1000 COMPLAINT e-mails are classified as class QUESTION and might not be treated with high priority. 
+
+Analysis of Answer:
+
+Here is the original question: 
+
+Q1: Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?
+Q2: Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
+The most important aspect is that you read the question carefully and answer only the bits that are requested. 
+
+Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?
+Here you can answer as shown above:
+
+The confusion matrix shows us, that there is considerable confusion for both classes. 2500 samples have been falsely classified overall. (2p)
+
+Alternatively describe the behavior using precision, or percentage of false positives. E.g. :
+
+The precision of the model is 0.75 (2500 E-Mails wrongly classified, not on diagonal of matrix)
+There are 2500 False Positives and 7500 True Positives
+25 % of the E-Mails in the Test set are False Positives.
+25% of the E-Mails in the Test set are False Positives. 
+If you would only provide a general statement about the performance and not refer to the values in the matrix you would loose points. All above variants are complete points variants.
+
+Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
+Here it is important to give a clear yes / no indication and to refer to the measurements in the matrix:
+
+The model performance is not suitable for the use case. 1000 E-mails of class COMPLAINT are classified as QUESTION, and 1500 QUESTION E-Mails have been classified as COMPLAINT. The use case is focused on treating COMPLAINT E-Mails with higher priority. It is therefore very problematic that 1000 COMPLAINT e-mails are classified as class QUESTION and might not be treated with high priority. 
+
+The important bit here is to show that you can read the confusion matrix and understand the confusion of the model and how it relates to the use cases.  In above answer there is:
+
+A clear answer that the model performance does not fit the use case (2p)
+The answer is based on referencing and arguing based on the confusion matrix (2p)
+It explains what the problematic aspect is for the use case (2p)
+Please note that while the misclassified COMPLAINT e-mails are the worst aspect for the use case you could have also argued on the misclassified QUESTION e-mails that create additional work-load and potential delays for the team working on customer complaints, and would have also gotten full points. 
+
+**Question 2**:
+
+Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
