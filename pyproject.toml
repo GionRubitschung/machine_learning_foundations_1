@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "machine-learning-foundations-1"
+version = "0.1.0"
+description = ""
+authors = ["Gion Rubitschung <gionrubi@proton.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+gensim = "4.3.2"
+logging = "^0.4.9.6"
+ipykernel = "^6.29.0"
+pandas = "^2.2.0"
+scikit-learn = "^1.4.0"
+matplotlib = "^3.8.2"
+seaborn = "^0.13.2"
+notebook = "^7.0.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
