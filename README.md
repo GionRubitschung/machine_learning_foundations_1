@@ -55,7 +55,7 @@ This summary covers all the theoretical parts of the bfh lecture "Machine Learni
     - [Why is it important to document the setup of a machine learning run?](#why-is-it-important-to-document-the-setup-of-a-machine-learning-run)
     - [What are steps that can be taken to optimize the training material?](#what-are-steps-that-can-be-taken-to-optimize-the-training-material)
     - [What are steps that can be taken to optimize the evaluation?](#what-are-steps-that-can-be-taken-to-optimize-the-evaluation)
-  - [3. Training Exam](#3-training-exam)
+  - [4. Training Exam](#4-training-exam)
     - [Exercise 1](#exercise-1)
       - [Question 1. Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?](#question-1-based-on-the-measurements-shown-in-the-confusion-matrix-what-is-your-interpretation-of-the-machine-learning-model-performance)
       - [Question 2. Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.](#question-2-does-it-fit-with-the-customer-expectations-yesno--provide-a-short-explanation-for-your-choice-that-refers-to-the-measurements-in-the-confusion-matrix)
@@ -428,7 +428,7 @@ Executing with the above combination is often called a Run.
 - Increase testing (Test multiple times)
 - Test with different splits across test and train
 
-## 3. Training Exam
+## 4. Training Exam
 
 ### Exercise 1
 
