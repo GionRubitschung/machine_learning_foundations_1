@@ -58,7 +58,12 @@ This summary covers all the theoretical parts of the bfh lecture "Machine Learni
   - [3. Training Exam](#3-training-exam)
     - [Exercise 1](#exercise-1)
       - [Question 1. Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?](#question-1-based-on-the-measurements-shown-in-the-confusion-matrix-what-is-your-interpretation-of-the-machine-learning-model-performance)
+      - [Question 2. Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.](#question-2-does-it-fit-with-the-customer-expectations-yesno--provide-a-short-explanation-for-your-choice-that-refers-to-the-measurements-in-the-confusion-matrix)
       - [Solution](#solution)
+    - [Exercise 2](#exercise-2)
+      - [Question 1. Based on above input make a suggestion what is most likely the underlying problem of the machine learning system?](#question-1-based-on-above-input-make-a-suggestion-what-is-most-likely-the-underlying-problem-of-the-machine-learning-system)
+      - [Question 2.](#question-2)
+      - [Solution](#solution-1)
 
 ## 1. Machine learning & data engineering context
 
@@ -457,46 +462,102 @@ Precision (for Class 0 - COMPLAINT): $\frac{TP}{TP+FP}=\frac{500}{500+1000}≈33
 
 Recall (for Class 0 - COMPLAINT): $\frac{TP}{TP+FN}=\frac{500}{500+1500}=25\%$
 
+**Q1: Answer in 1-2 sentences (2P)**
+
 The model has a precision of only 33.333% = 500 / (500 + 1000), with a recall of 25% = 500 / (500 + 1500). Based on this observation we can say the model is very inaccurate.
 
+#### Question 2. Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
+
+**Q2: Answer in 2-3 sentences (6P)**
+
+It does not fit with the expectations. The users where focused on identifying complaints and the model is performing poorly in identifying those.
+
 #### Solution
-Here is a sample answer:
+**Here is a sample answer:**
 
 The confusion matrix shows us, that there is considerable confusion for both classes. 2500 samples have been falsely classified overall. The model performance is not suitable for the use case. 1000 E-mails of class COMPLAINT are classified as QUESTION, and 1500 QUESTION E-Mails have been classified as COMPLAINT. The use case is focused on treating COMPLAINT E-Mails with higher priority. It is therefore very problematic that 1000 COMPLAINT e-mails are classified as class QUESTION and might not be treated with high priority. 
 
-Analysis of Answer:
+**Analysis of Answer:**
 
 Here is the original question: 
 
-Q1: Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?
-Q2: Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
+- Q1: Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?
+- Q2: Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
+
 The most important aspect is that you read the question carefully and answer only the bits that are requested. 
 
-Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?
+- Based on the measurements shown in the confusion matrix, what is your interpretation of the machine learning model performance?
 Here you can answer as shown above:
 
 The confusion matrix shows us, that there is considerable confusion for both classes. 2500 samples have been falsely classified overall. (2p)
 
 Alternatively describe the behavior using precision, or percentage of false positives. E.g. :
 
-The precision of the model is 0.75 (2500 E-Mails wrongly classified, not on diagonal of matrix)
-There are 2500 False Positives and 7500 True Positives
-25 % of the E-Mails in the Test set are False Positives.
-25% of the E-Mails in the Test set are False Positives. 
+  - The precision of the model is 0.75 (2500 E-Mails wrongly classified, not on diagonal of matrix)
+  - There are 2500 False Positives and 7500 True Positives
+  - 25 % of the E-Mails in the Test set are False Positives.
+  - 25% of the E-Mails in the Test set are False Positives. 
+
 If you would only provide a general statement about the performance and not refer to the values in the matrix you would loose points. All above variants are complete points variants.
 
-Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
+- Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
 Here it is important to give a clear yes / no indication and to refer to the measurements in the matrix:
 
 The model performance is not suitable for the use case. 1000 E-mails of class COMPLAINT are classified as QUESTION, and 1500 QUESTION E-Mails have been classified as COMPLAINT. The use case is focused on treating COMPLAINT E-Mails with higher priority. It is therefore very problematic that 1000 COMPLAINT e-mails are classified as class QUESTION and might not be treated with high priority. 
 
 The important bit here is to show that you can read the confusion matrix and understand the confusion of the model and how it relates to the use cases.  In above answer there is:
 
-A clear answer that the model performance does not fit the use case (2p)
-The answer is based on referencing and arguing based on the confusion matrix (2p)
-It explains what the problematic aspect is for the use case (2p)
+  - A clear answer that the model performance does not fit the use case (2p)
+  - The answer is based on referencing and arguing based on the confusion matrix (2p)
+  - It explains what the problematic aspect is for the use case (2p)
+
 Please note that while the misclassified COMPLAINT e-mails are the worst aspect for the use case you could have also argued on the misclassified QUESTION e-mails that create additional work-load and potential delays for the team working on customer complaints, and would have also gotten full points. 
 
-**Question 2**:
+### Exercise 2
 
-Does it fit with the customer expectations (Yes/No) ? Provide a short explanation for your choice that refers to the measurements in the confusion matrix.
+You are in charge of a machine learning project targeted at improving spam classification performance on the e-mails in your company.
+The project is supposed to replace an external spam-classification solution that achieves 80% accuracy on the e-mails in your company.
+ 
+After several weeks of model training you end up with the following status:
+ 
+What you have already done:
+ 
+- Your team has collected a set of 10000 training data e-mails and labelled the e-mails according to the classes spam, non-spam.
+- You have extensively tried all available options for different algorithms and algorithm architectures and optmised hyper-parameters extensively. The best measured accuracy with a test-set was 0.6.
+- You have measured inter-annotator agreement at 0.95 and Cohen's Kappa at 0.4.
+- You have analysed the data-preprocessing and there are no issues there. You have also analysed the composition of the training data and its quality and found no issues there. Adding more data also did not help.
+
+#### Question 1. Based on above input make a suggestion what is most likely the underlying problem of the machine learning system?
+
+**Q1: Provide a short answer in 1 or 2 sentences (6 points)**
+
+The labelling and annotation is most likely the problem. The IAA is quite high but Cohen's Kappa is moderate which suggests that a lot of the agreements are by chance and not actually by agreement.
+
+#### Question 2. 
+
+**Q2: Provide a short explanation for each suggestion (1-2 sentences) (8 points)**
+
+1. Improve the guidelines so the users are better instructed when labelling the data.
+2. Improve the quality of the training data. The data for the annotators should be intuitively to label
+
+#### Solution
+
+As with the previous sample question make sure to read the input precisely.
+The question describes a typical situation in a machine learning project. You are supposed to identify the next promising steps of actions for you and the project team.
+
+If we use the exact question text for question 1 with ChatGPT we will get the following answer:
+
+Given the detailed information you've provided, there are several factors to consider when diagnosing the underlying problem with your machine learning system, especially since standard approaches like extensive hyperparameter tuning, data preprocessing analysis, and dataset quality assessment haven't yielded a high accuracy. Here are some potential issues and areas to explore:
+  1. **Algorithm and Model Architecture**: Even with extensive hyperparameter tuning, it's possible that the algorithms you've tried so far are not well-suited to the specific characteristics of your data. Some models might be inherently better at capturing the nuances of text data, like spam emails. If you haven't already, consider trying advanced text-specific algorithms like LSTM (Long Short-Term Memory networks), GRU (Gated Recurrent Units), Transformer-based models (like BERT or GPT), or ensemble methods that combine different model predictions.
+  2. **Cohen's Kappa (0.4)**: This is a crucial point to consider. Cohen's Kappa measures the agreement between two raters (or, in your case, the agreement between the model predictions and the true labels) after accounting for chance. A Kappa of 0.4 indicates a moderate level of agreement but suggests there's still significant room for improvement. This could imply that the model is not capturing the underlying patterns in the data as effectively as it should, or the problem is more complex than initially assumed.
+  3. **Feature Engineering and Selection**: While the preprocessing of data might not have issues, the selection and engineering of features are different matters. In text classification tasks like spam detection, the way text data is converted into features can significantly impact model performance. Techniques like TF-IDF, word embeddings, or more sophisticated NLP feature extraction methods could be explored or revisited.
+  4. **Model Interpretability and Error Analysis**: Conducting a thorough error analysis can provide insights into what the model is getting wrong. Are there specific types of emails (e.g., certain language patterns, email formats, or spam types) that the model consistently misclassifies? Understanding the nature of these errors can guide you in adjusting your model or preprocessing accordingly.
+  5. **Class Imbalance**: If there's a significant imbalance between the spam and non-spam classes in your training data, this could skew the model's performance. Techniques like SMOTE (Synthetic Minority Over-sampling Technique), adjusting class weights, or using different performance metrics better suited for imbalanced data might be necessary.
+  6. **Model Complexity**: There's a possibility that the model is either too complex (overfitting) or too simple (underfitting) for your data. This can be assessed by looking at the performance of the model on both the training set and the test set. Overfitting would be indicated by high training accuracy but low test accuracy, whereas underfitting would show poor performance on both.
+  7. **External Factors**: Sometimes, the issue might not be entirely with the model or data but external factors. For example, changes in spamming techniques over time can render a previously effective model less accurate. Ensure that your model is trained on up-to-date and representative data.
+   
+In summary, given your extensive efforts in data preparation and model tuning, I would recommend focusing on advanced model architectures, deeper feature engineering, and a thorough error analysis to understand where your model is falling short. Additionally, exploring the implications of the moderate Cohen's Kappa score and addressing potential class imbalance issues could be key to improving your model's performance.
+
+The correct answer is contained in there. Given everything that is excluded the underlying issue is most likely with class imbalance or feature engineering. Those two answers would provide you with points for the question. Class imbalance is highly indicated by the low Kappa while having an overall high agreement between annotators. It is likely the SPAM class that has very few samples. The second still likely cause is feature engineering. All other factors excluded, it leaves the optimisation of the representation of text as a way to try to improve model performance. However, if you would choose external factors, model interpretability, algorithm and model-architecture (as it is excluded in the question text) then you would get no points. While being suggested by ChatGPT they are either excluded or have no relevance to the described situation. 
+
+For the second part of the question you can then explain your ideas how to improve this situation. E.g. by adding more SPAM samples, or by using different vectorisation techniques. Mentioning the correct techniques is the key to getting the points for this question. If you would mention measures excluded and not relevant to the situation you would get no points. 
